@@ -5,7 +5,6 @@ add_subdirectory(subprojects/raylib)
 
 file(GLOB SRCS src/*.c)
 
-# Add source files
 add_executable(raylib_2d
     main.c
     ${SRCS}
@@ -14,3 +13,15 @@ add_executable(raylib_2d
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} raylib)
+
+target_compile_options(${PROJECT_NAME} PRIVATE
+    -Wall
+    -Wextra
+    -Werror
+    -fsanitize=address
+    -fno-omit-frame-pointer
+)
+
+target_link_options(${PROJECT_NAME} PRIVATE
+    -fsanitize=address
+)
